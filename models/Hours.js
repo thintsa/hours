@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var HoursSchema = new mongoose.Schema({
-    employee_id: ObjectId,
+    employee_id: mongoose.Schema.Types.ObjectId,
     date: Date,
     category: String,
     hours: Number
