@@ -1,11 +1,48 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
+<html ng-app="app">
+
+<head>
+    <title>QvikHours</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p><%= title %> and ready to rock!</p>
-  </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
+</head>
+
+<body>
+    <h1>QvikHours</h1>
+    <p>QvikHours is ready to rock!</p>
+
+    <ng-view></ng-view>
+
+    <!-- Templates -->
+    <script type="text/ng-template" id="/employees.html">
+        Search:
+        <input type="text" ng-model="search.name">
+        <ul>
+            <li ng-repeat="employee in employees | filter: search">
+                <a href="#/{{employee._id}}">{{employee.name}}</a> {{employee.birthday}} {{employee.gender}} {{employee.photo}}
+                <button ng-click="remove($index)">remove</button>
+            </li>
+        </ul>
+        New employee name
+        <input type="text" ng-model="newEmployee"> birthday
+        <input type="text" ng-model="newEmployeeBirthdate"> gender
+        <input type="text" ng-model="newEmployeeGender"> photo
+        <input type="text" ng-model="newEmployeePhoto">
+        <button ng-click="save()">Create</button>
+    </script>
+
+    <script type="text/ng-template" id="/employeeDetails.html">
+        <h1>{{ employee.name }}</h1>
+        <ul>
+            <li ng-repeat="employeehour in employeehours">
+                {{employeehour.date}} {{employeehour.category}} {{employeehour.hours}}
+            </li>
+        </ul>
+    </script>
+
+    <script src="javascripts/app.js"></script>
+</body>
+
 </html>

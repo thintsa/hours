@@ -13,7 +13,7 @@ var categories = require('./routes/categories');
 var app = express();
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/todoApp', function(err) {
+mongoose.connect('mongodb://localhost/hours', function(err) {
     if(err) {
         console.log('MongoDB connection error', err);
     } else {
