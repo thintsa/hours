@@ -32,3 +32,8 @@ div.employee {
 .name, .birthday, .gender {
     font-size: 2em;
 }
+
+.hour {
+    border: 1px solid gray;
+    padding: 1em;
+}
