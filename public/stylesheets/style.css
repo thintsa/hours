@@ -24,3 +24,7 @@ div.employee {
 .placeholder {
     background: lightgray;
 }
+
+.highlight {
+    background: pink;
+}

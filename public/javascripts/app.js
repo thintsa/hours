@@ -28,6 +28,36 @@ $(document).ready(function () {
     $('#addimage').submit(function (event) {
         event.preventDefault();
     });
-    
 
+    $('#newemployee_submit').on('click', function (event) {
+        var user = {
+            name: $('#name').val(),
+            birthday: Date.parseString($('#birthday').val(), 'd.M.yyyy'),
+            photo: $('#photo').val(),
+            gender: $('input[name=gender]:checked').val()
+        };
+
+        if(user.name != "" && user.birthday != null && user.gender != null) {
+
+            $.post('/employees', user, function (data, status) {
+                console.log("success");
+            });
+
+            // clear forms
+            $('#addimage')[0].reset();
+            $('img#thumb').replaceWith($('<img id="thumb" class="thumb placeholder"></img>'));
+            $('#newemployee')[0].reset();
+        } else {
+            if(user.name == "") {
+                $('#namelabel').addClass('highlight');
+            }
+            if(user.birthday == null) {
+                $('#birthdaylabel').addClass('highlight');
+            }
+            if(user.gender == null) {
+                $('#genderlabel').addClass('highlight');
+            }
+        }
+
+    });
 });
