@@ -6,3 +6,21 @@ body {
 a {
   color: #00B7FF;
 }
+
+div.employee {
+    border: 1px solid black;
+    padding: 1em;
+    margin-bottom: 2px;
+}
+.thumb {
+    width: 100px;
+    height: 100px;
+}
+
+.hidden {
+    display: none;
+}
+
+.placeholder {
+    background: lightgray;
+}

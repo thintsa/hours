@@ -52,6 +52,8 @@ router.delete('/:id', function (req, res, next) {
         if (err) return next(err);
         res.json(post);
     });
+
+    //TODO: delete the photo too
 });
 
 module.exports = router;

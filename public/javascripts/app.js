@@ -1,84 +1,33 @@
-// Angular app
-angular.module('app', ['ngRoute', 'ngResource'])
+$(document).ready(function () {
+    // date picker for the birthday
+    $('#birthday').fdatepicker({
+        format: 'd.m.yyyy',
+        weekStart: 1
+    })
 
-// Services
-.factory('Employees', ['$resource', function ($resource) {
-    return $resource('/employees/:id', null, {
-        'update': {
-            method: 'PUT'
-        }
-    });
-}])
-
-.factory('EmployeeHours', ['$resource', function ($resource) {
-    return $resource('/employees/:id/hours', null, {
-        'update': {
-            method: 'PUT'
-        }
-    });
-}])
-
-// Controllers
-.controller('EmployeeController', ['$scope', 'Employees', function ($scope, Employees) {
-    $scope.employees = Employees.query();
-
-    $scope.save = function () {
-        if (!$scope.newEmployee || $scope.newEmployee.length < 1) return;
-        var employee = new Employees({
-            name: $scope.newEmployee,
-            birthday: $scope.newEmployeeBirthdate,
-            gender: $scope.newEmployeeGender,
-            photo: $scope.newEmployeePhoto
-        });
-        employee.$save(function () {
-            $scope.employees.push(employee);
-            $scope.newEmployee = ''; // clear textboxes
-            $scope.newEmployeeBirthdate = '';
-            $scope.newEmployeeGender = '';
-            $scope.newEmployeePhoto = '';
-        });
-    }
-
-    $scope.remove = function (index) {
-        var employee = $scope.employees[index];
-        Employees.remove({
-            id: employee._id
-        }, function () {
-            $scope.employees.splice(index, 1);
-        });
-    }
-
-}])
-
-.controller('EmployeeDetailCtrl', ['$scope', '$routeParams', 'Employees', 'EmployeeHours', '$location', function ($scope, $routeParams, Employees, EmployeeHours, $location) {
-    $scope.employeehours = EmployeeHours.get({
-        id: $routeParams.id
+    // image uploader for the employee image
+    $('#imageupload').ajaxfileupload({
+        action: '/upload',
+        onStart: function () {},
+        onComplete: function (response) {
+            // switch image to correct one
+            var image = $('<img id="thumb" class="thumb" src="' + response.filename + '"/>');
+            var imagecontainer = $('img#thumb');
+            imagecontainer.replaceWith(image);
+            // put the name in the form too
+            $('#photo').val(response.filename);
+        },
+        submit_button: $('#uploadsubmit')
     });
 
-    $scope.employee = Employees.get({
-        id: $routeParams.id
+    // submit automatically when the picture is selected
+    $('#imageupload').change(function (event) {
+        $('#uploadsubmit').click();
+    });
+
+    $('#addimage').submit(function (event) {
+        event.preventDefault();
     });
     
-    $scope.remove = function () {
-        Employees.remove({
-            id: $scope.employee._id
-        }, function () {
-            $location.url('/');
-        });
-    }
 
-}])
-
-// Routes
-.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider
-        .when('/', {
-            templateUrl: '/employees.html',
-            controller: 'EmployeeController'
-        })
-
-    .when('/:id', {
-        templateUrl: '/employeeDetails.html',
-        controller: 'EmployeeDetailCtrl'
-    });
-}]);
+});

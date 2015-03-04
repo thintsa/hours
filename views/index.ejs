@@ -1,48 +1,98 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>QvikHours</title>
+    <link rel='stylesheet' href='/stylesheets/normalize.css' />
+    <link rel='stylesheet' href='/stylesheets/foundation.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/foundation-datepicker.css' />
+    <link rel='stylesheet' href='/stylesheets/font-awesome.css' />
+    <script src="javascripts/modernizr.js"></script>
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/fastclick.js"></script>
+    <script src="javascripts/foundation.min.js"></script>
+    <script src="javascripts/foundation-datepicker.js"></script>
+    <script src="javascripts/jquery.ajaxfileupload.js"></script>
+    <script src="javascripts/app.js"></script>
 </head>
 
 <body>
-    <h1>QvikHours</h1>
-    <p>QvikHours is ready to rock!</p>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="nav-bar left">
+                <ul class="button-group">
+                    <li><a href="#" class="button">Employees</a>
+                    </li>
+                    <li><a href="#" class="button">Hours</a>
+                    </li>
+                </ul>
+            </div>
+            <h1>QvikHours <small>is ready to rock!</small></h1>
+            <hr/>
+        </div>
+    </div>
 
-    <ng-view></ng-view>
+    <div class="row">
+        <div class="large-12 columns employee">
 
-    <!-- Templates -->
-    <script type="text/ng-template" id="/employees.html">
-        Search:
-        <input type="text" ng-model="search.name">
-        <ul>
-            <li ng-repeat="employee in employees | filter: search">
-                <a href="#/{{employee._id}}">{{employee.name}}</a> {{employee.birthday}} {{employee.gender}} {{employee.photo}}
-                <button ng-click="remove($index)">remove</button>
-            </li>
-        </ul>
-        New employee name
-        <input type="text" ng-model="newEmployee"> birthday
-        <input type="text" ng-model="newEmployeeBirthdate"> gender
-        <input type="text" ng-model="newEmployeeGender"> photo
-        <input type="text" ng-model="newEmployeePhoto">
-        <button ng-click="save()">Create</button>
+            <div class="large-1 columns">image
+            </div>
+            <div class="large-11 columns"><span class="name">Timo</span><span class="gender"></span><span class="birthday">3.8.1978</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row employee">
+        <form id="addimage" method="POST" action="/upload" enctype='multipart/form-data'>
+            <div class="large-2 columns">
+                <label>Upload a photo</label>
+                <img id="thumb" class="thumb placeholder"></img>
+                <input type="file" id="imageupload" name="imageupload" accept='image/*'></input>
+                <input type="submit" id="uploadsubmit" type="submit" name="uploadsubmit" class="hidden"></input>
+            </div>
+        </form>
+        <form id="newemployee">
+            <div class="large-10 columns">
+                <div class="large-4 columns">
+                    <label>Name</label>
+                    <input type="text" id="name" name="name" placeholder="Joe Public" />
+                    </ br>
+                    <label>Birthday</label>
+                    <input type="text" id="birthday" name="birthday" placeholder="18.3.1980" />
+                    <input type="hidden" id="photo" name="photo" />
+                </div>
+                <div class="large-4 columns">
+                    <label>Gender</label>
+                    <input type="radio" name="pokemon" value="male" id="male">
+                    <label for="male">Male</label>
+                    <input type="radio" name="pokemon" value="female" id="female">
+                    <label for="female">Female</label>
+                </div>
+                <div class="large-4 columns">
+                    <a class="button" id="newemployee_submit" href="#">Add</a>
+                </div>
+            </div>
+    </div>
+    </form>
+    <footer class="row">
+        <div class="large-12 columns">
+            <hr/>
+            <div class="row">
+                <div class="large-6 columns">
+                    <p>© Copyright no one at all. Go to town.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        $(document).foundation();
     </script>
-
-    <script type="text/ng-template" id="/employeeDetails.html">
-        <h1>{{ employee.name }}</h1>
-        <ul>
-            <li ng-repeat="employeehour in employeehours">
-                {{employeehour.date}} {{employeehour.category}} {{employeehour.hours}}
-            </li>
-        </ul>
-    </script>
-
-    <script src="javascripts/app.js"></script>
 </body>
 
 </html>
