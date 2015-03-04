@@ -21,6 +21,8 @@ router.post('/upload', [ multer({ dest: './public/images/upload/'}), function (r
         filename: webpath + filename
     };
 
+    //TODO: you might want to scale the image to suitable size
+
     //XXX: delay to ensure the thumbnail image is written to disk
     setTimeout(function () {
         res.send(JSON.stringify(output));
