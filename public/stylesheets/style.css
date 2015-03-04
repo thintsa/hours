@@ -28,3 +28,7 @@ div.employee {
 .highlight {
     background: pink;
 }
+
+.name, .birthday, .gender {
+    font-size: 2em;
+}

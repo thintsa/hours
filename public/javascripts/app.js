@@ -65,7 +65,10 @@ $(document).ready(function () {
         $.getJSON('/employees', function(data, status) {
             var employees = [];
             $.each(data, function(key, val) {
-                employees.push('<div class="large-12 columns employee"><div class="large-2 columns"><img class="thumb" src="' + val.photo + '"></img></div><div class="large-10 columns"><span class="name">' + val.name + '</span><span class="gender">' + val.gender + '</span><span class="birthday">' + val.birthday + '</span></div></div>');
+                var gender = val.gender ? 'Female' : 'Male';
+                var birthday = new Date(val.birthday);
+
+                employees.push('<div class="large-12 columns employee"><div class="large-2 columns"><img class="thumb" src="' + val.photo + '"></img></div><div class="large-10 columns"><div class="name">' + val.name + '</div><div class="gender">' + gender + '</div><div class="birthday">' + birthday.format('d.M.yyyy') + '</div></div></div>');
             });
             $('<div/>', {
                 'class': 'row',
