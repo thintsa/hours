@@ -60,4 +60,19 @@ $(document).ready(function () {
         }
 
     });
+
+    function load_employees() {
+        $.getJSON('/employees', function(data, status) {
+            var employees = [];
+            $.each(data, function(key, val) {
+                employees.push('<div class="large-12 columns employee"><div class="large-2 columns"><img class="thumb" src="' + val.photo + '"></img></div><div class="large-10 columns"><span class="name">' + val.name + '</span><span class="gender">' + val.gender + '</span><span class="birthday">' + val.birthday + '</span></div></div>');
+            });
+            $('<div/>', {
+                'class': 'row',
+                html: employees.join('')
+            }).appendTo('#employees');
+        });
+    }
+
+    load_employees();
 });

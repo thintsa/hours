@@ -37,14 +37,7 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="large-12 columns employee">
-
-            <div class="large-1 columns">image
-            </div>
-            <div class="large-11 columns"><span class="name">Timo</span><span class="gender"></span><span class="birthday">3.8.1978</span>
-            </div>
-        </div>
+    <div id="employees">
     </div>
 
     <div class="row employee">
@@ -59,15 +52,18 @@
         <form id="newemployee">
             <div class="large-10 columns">
                 <div class="large-4 columns">
-                    <label id="namelabel">Name <small>required</small></label>
-                    <input type="text" id="name" name="name" placeholder="Joe Public" required pattern="[a-zA-Z]+"/>
+                    <label id="namelabel">Name <small>required</small>
+                    </label>
+                    <input type="text" id="name" name="name" placeholder="Joe Public" required pattern="[a-zA-Z]+" />
                     </ br>
-                    <label id="birthdaylabel">Birthday <small>required</small></label>
+                    <label id="birthdaylabel">Birthday <small>required</small>
+                    </label>
                     <input type="text" id="birthday" name="birthday" placeholder="18.3.1980" />
                     <input type="hidden" id="photo" name="photo" />
                 </div>
                 <div class="large-4 columns">
-                    <label id="genderlabel">Gender <small>required</small></label>
+                    <label id="genderlabel">Gender <small>required</small>
+                    </label>
                     <input type="radio" name="gender" value="false" id="male">
                     <label for="male">Male</label>
                     <input type="radio" name="gender" value="true" id="female">
